@@ -2,9 +2,7 @@
 /*Ejercicio 1
 Mostra per la consola el resultat d'una arrow function autoinvocable que sumi dos nombres.*/
 
-const suma = (((num1, num2) => num1 + num2)(6, 3));
-console.log(suma);
-
+const suma = ((num1, num2) => { console.log(`La suma de los numeros es ${num1 + num2}`) })(6, 4);
 
 
 /*Ejercicio 2
