@@ -39,7 +39,7 @@ Escriu una function creadora d'objectes que faci instàncies d'una classe abstra
 amb diferents definicions.*/
 
 //CREACION DE OBJETO PADRE
-function crearObjecto(base, ...args) {
+function crearObjeto(base, ...args) {
     //Creamos una función en prototype del objeto
     function miFuncion() { }
     miFuncion.prototype = base.prototype;
@@ -63,8 +63,8 @@ Ciudadano.prototype.censar = function () {
     console.log(`DNI: ${this.dni} con codigo Postal ${this.cPostal} y reside en ${this.poblacion}.`);
 };
 
-const c1 = crearObjecto(Ciudadano, "46549818A", 50, "Barcelona");
-const c2 = crearObjecto(Ciudadano, "45865446B", 18, "Madrid");
+const c1 = crearObjeto(Ciudadano, "46549818A", 50, "Barcelona");
+const c2 = crearObjeto(Ciudadano, "45865446B", 18, "Madrid");
 c1.censar();
 c2.censar();
 
@@ -82,8 +82,8 @@ Profesion.prototype.profesion = function () {
     console.log(`El alumno ${this.nombre} ${this.apellido} será ${this.titulo}.`);
 };
 
-const al1 = crearObjecto(Profesion, "Jose Luis", "Conde", "programador");
-const al2 = crearObjecto(Profesion, "Miguel", "Hernandez", "administrativo");
+const al1 = crearObjeto(Profesion, "Jose Luis", "Conde", "programador");
+const al2 = crearObjeto(Profesion, "Miguel", "Hernandez", "administrativo");
 al1.profesion();
 al2.profesion();
 
@@ -100,8 +100,8 @@ Conductor.prototype.conducir = function () {
     console.log(`El conductor ${this.nombre} tiene el permiso de conduccion tipo ${this.permiso}.`);
 };
 
-const cond1 = crearObjecto(Conductor, "Jose Luis", "B1");
-const cond2 = crearObjecto(Conductor, "Miguel", "C1");
+const cond1 = crearObjeto(Conductor, "Jose Luis", "B1");
+const cond2 = crearObjeto(Conductor, "Miguel", "C1");
 cond1.conducir();
 cond2.conducir();
 
