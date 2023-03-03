@@ -20,8 +20,8 @@ un mètode dirNom que imprimeixi per consola el paràmetre 'nom'. Invoca el mèt
 dirNom des de fora de la classe.*/
 
 class Persona {
-    constructor(nom) {
-        this.nombre = nom;
+    constructor(nombre) {
+        this.nombre = nombre;
     }
 
     dirNom() {
