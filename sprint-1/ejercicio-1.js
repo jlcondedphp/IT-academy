@@ -15,13 +15,13 @@ pideNombre('Jose Luis\n');
 //Mostra per consola el nom i cognoms de l'usuari/ària mitjançant template literals, guardant-los en variables i 
 //referenciant-les en la impressió del missatge.
 
-function mostrarNombre(nombre){
-    const tuNombre = `Tu nombre es ${nombre}`;
-    return tuNombre;
+function mostrarUsuario(nombre, apellidos) {
+    return `El usuario introducido se llama ${nombre} ${apellidos}.`
 }
 
+
 console.log('Ejercicio 1/2');
-console.log(mostrarNombre('Jose Luis\n'));
+console.log(mostrarUsuario('Jose Luis', 'Conde Diez'));
 
 //Ejercicio 2
 //Invoca una funció que retorni un valor des de dins d'una template literal.
@@ -62,10 +62,4 @@ for(let i=0; i<10; i++){
 //Crea una funció anònima autoinvocable igualada a una variable que mostri per consola el nom de l'usuari/ària a rebut com a paràmetre.
 
 console.log('\nEjercicio 3/2');
-pedirNombre = function (nombre){
-    return nombre;
-}
-
-const literal = `El nombre que has introducido es ${pedirNombre('Jose Luis')}`;
-
-console.log(literal);
+const nombre = ((nombre) => {console.log(`Tu nombre es ${nombre}`);})('Jose Luis');
