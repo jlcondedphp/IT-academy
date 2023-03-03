@@ -21,7 +21,7 @@ function mostrarUsuario(nombre, apellidos) {
 
 
 console.log('Ejercicio 1/2');
-console.log(mostrarUsuario('Jose Luis', 'Conde Diez'));
+console.log(mostrarUsuario('Jose Luis', 'Conde Diez\n'));
 
 //Ejercicio 2
 //Invoca una funció que retorni un valor des de dins d'una template literal.
