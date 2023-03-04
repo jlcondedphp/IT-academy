@@ -35,7 +35,24 @@ getPelis()
     .then((peliculas) => console.log(peliculas))
     .catch(error => console.error(error.message));
 
+//Nivel 1/ Ejercicio 2
+/*Crea una arrow function que rebi un paràmetre i una funció callback i li passi a la funció un missatge o un 
+altre (que s'imprimirà per consola) en funció del paràmetre rebut.*/
 
+
+const miFuncion = (param, callback) => {
+    console.log(`Estamos dentro de miFuncion con un parametro con valor ${param}`);
+    callback(param);
+}
+const callback = (param) => {
+    if (param > 0) {
+        console.log('Hay un valor positivo')
+    } else {
+        console.log('Hay un valor negativo');
+    }
+}
+
+miFuncion(10, callback);
 
 
 
