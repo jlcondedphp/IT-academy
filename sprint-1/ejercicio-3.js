@@ -89,16 +89,49 @@ const getEmployee = (id) => {
     });
 }
 
-
 const buscarId = (id) => {
     employees.forEach(o => {
         if (o.id === id) {
-            console.log(o.name);
+            return (o.name);
         }
-    });;
+    });
 }
-
-getEmployee(1)
+getEmployee(2)
     .then((employees))
     .catch(error => console.error(error.message));
 
+
+/*Crea una altra arrow function getSalary() similar a l'anterior que rebi com a paràmetre un
+ objecte employee i retorni el seu salari.*/
+
+ const getSalary = (object) => {
+    return new Promise((resolve,reject) => {
+        resolve(buscarIdO(object.id));
+
+    });
+ }
+ const buscarIdO = (id) => {
+    salaries.forEach(o=>{
+        if(o.id === id){
+            return (o.salary);
+    };
+ });
+}
+ getSalary(employees[0])
+            .then((employees))
+            .catch(error => console.error(error.message));
+
+
+/* Invoca la primera funció getEmployee() i després getSalary() niant l'execució de les dues promises de manera que
+es retorni per la consola el nom de l'empleat/da i el seu salari.*/
+ 
+const promesasEncadenadas = () => {
+    return new Promise((resolve, reject) => {        
+        resolve(getEmployee(2));
+        resolve(getSalary(employees[1]));
+    });
+}
+
+promesasEncadenadas()
+                .then(employees => console.log(employees.name))
+                .then(salaries => console.log(salaries.salary));
