@@ -4,7 +4,7 @@
 que rep. Invoca-la passant-li les dues funcions de manera que imprimeixin un missatge 
 diferent depenent de si la Promise es resol o no.
 
-//peliculas*/
+//peliculas
 peliculas = [
     {
         id: 1,
@@ -37,7 +37,7 @@ getPelis()
 
 //Nivel 1/ Ejercicio 2
 /*Crea una arrow function que rebi un paràmetre i una funció callback i li passi a la funció un missatge o un 
-altre (que s'imprimirà per consola) en funció del paràmetre rebut.*/
+altre (que s'imprimirà per consola) en funció del paràmetre rebut.
 
 
 const miFuncion = (param, callback) => {
@@ -80,102 +80,71 @@ let salaries = [{
     salary: 2000
 }];
 
-/*
+
+
 const getEmployee = (id) => {
-    return new Promise((resolve,reject) =>{
-            let empleado = employees.find(item => item.id == id);
-
-            if(!empleado){
-                reject(new Error(`El id ${id} no es un id valido`));
-            }else{
-                resolve(`El nombre del empleado es ${empleado.name}`);
-            }   
-    });
-}
-getEmployee(1)
-        .then(respuesta => console.log(respuesta))
-        .catch(error => console.error(error.message))
-
-
-        
-/*Crea una altra arrow function getSalary() similar a l'anterior que rebi com a paràmetre un
- objecte employee i retorni el seu salari.
-
- const getSalary = (obj) => {
-    return new Promise((resolve,reject) => {
-        let salario = salaries.find(item => item.id == obj.id);       
-        console.log(salario);
-        if(!salario){
-            reject(new Error(`No es un id valido`));       
-        }else{ 
-            resolve(`El salario del empleado es ${salario.salary}`);                 
-        }     
-    });
- }
-
- getSalary(employees[2])
-            .then((salario => console.log(salario)))
-            .catch(error => console.error(error));
-
-
-/* Invoca la primera funció getEmployee() i després getSalary() niant l'execució de les dues promises de manera que
-es retorni per la consola el nom de l'empleat/da i el seu salari.*/
-
- const getEmployee2= (id) => {
-    return new Promise((resolve,reject) =>{
-            let empleado = employees.find(item => item.id == id);
-            
-            if(empleado){
-                resolve(`El nombre del empleado es ${empleado.name}`);                
-            }else{                
-                reject(new Error(`El id ${id} no es un id valido`));
-            }   
-    });
-}
-
-const getSalary2 = (obj) => {
-    return new Promise((resolve,reject) => {
-        let salario = salaries.find(salario => salario.id === obj.id);        
-
-        if(salario){
-            resolve(`El nombre del empleado es  ${obj.name} y su salario es ${salario.salary}`);                
-        }else{ 
-            reject(new Error(`No es un id valido`));              
-        }     
-    });
- }
-
- getSalary2(getEmployee2[1])
-        .then(respuesta => getEmployee2(respuesta))
-        .catch(error => console.error(error));
-
- /*getSalary2(getEmployee2(1))
-            .then(empleado => getSalary2(empleado))
-            //.then((salario=> console.log(salario)))
-            .catch(error => console.error(error.message));
-
-/*const getSalary2 = employee => {
     return new Promise((resolve, reject) => {
-        setTimeout(() => {
-            let salary = salaries.find(salary => salary.id === employee.id);
-            if (salary) {
-                resolve({
-                    Nombre: employee.name,
-                    Salario: salary.salary
-                });
-            } else {
-                reject(`No se ha encontrado dato alguno sobre el ID: ${employee.id}`);
-            }
-        }, 1000);
+        const empleado = employees.find((empleado) => empleado.id === id);
+        if (!empleado) {
+            reject(new Error(`El empleado con ese id no existe`));
+        } else {
+            resolve(empleado.name);
+        }
     });
-};
- 
-getEmployee2(2)
-    .then(employee => getSalary2(employee))
-    .then(employeeWithSalary => console.log(employeeWithSalary))*/
-  
-/*
-getEmployee(5)
-    .then(employee => getSalary(employee))
-    .then(result => console.log(`El nombre del empleado es ${result.Nombre} y su salario es ${result.Salario}`))
-    .catch(error => {console.error(`Ha ocurrido un error: ${error}`);})*/
+}
+
+getEmployee(1)
+    .then(encontrado => console.log(`El id encontrado pertenece al empleado ${encontrado}`))
+    .catch(error => console.error(error.message));
+
+
+//Nivel 2/ Ejercicio 2
+const getSalary = (object) => {
+    return new Promise((resolve, reject) => {
+
+        salario = salaries.find((salario) => salario.id === object.id);
+
+        if (salario !== undefined) {
+            resolve(`El salario del empleado es ${salario.salary}`);
+        }
+        else {
+            reject(new Error('No existe el id'));
+        }
+    });
+}
+
+getSalary(employees[1])
+    .then(salario => console.log(salario))
+    .catch(error => console.error(error.message));
+
+//Nivel 2/ Ejercicio 3
+
+const getEmployee2 = (id) => {
+    return new Promise((resolve, reject) => {
+        const empleado = employees.find(empleado => empleado.id === id);
+        if (empleado) {
+            resolve(empleado.name);
+        } else {
+            reject(new Error('No existe el id'));
+        }
+    });
+}
+
+const getSalary2 = (empleado) => {
+    return new Promise((resolve, reject) => {
+        const salario = salaries.find(salario => salario.id === empleado.id);
+        if (salario) {
+            resolve({
+                Nombre: empleado.name,
+                Salario: salario.salary
+            });
+        } else {
+            reject('No existe el id');
+        }
+    });
+}
+
+
+//Nivel 3/ Ejercicio 1
+
+
