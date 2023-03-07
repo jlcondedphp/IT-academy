@@ -80,58 +80,102 @@ let salaries = [{
     salary: 2000
 }];
 
+/*
 const getEmployee = (id) => {
-    return new Promise((resolve, reject) => {
-        if (id > employees.length || id <= 0) {
-            reject(new Error('No existe el empleado con ese Id'));
-        }
-        resolve(buscarId(id));
+    return new Promise((resolve,reject) =>{
+            let empleado = employees.find(item => item.id == id);
+
+            if(!empleado){
+                reject(new Error(`El id ${id} no es un id valido`));
+            }else{
+                resolve(`El nombre del empleado es ${empleado.name}`);
+            }   
     });
 }
-
-const buscarId = (id) => {
-    employees.forEach(o => {
-        if (o.id === id) {
-            return (o.name);
-        }
-    });
-}
-getEmployee(2)
-    .then((employees))
-    .catch(error => console.error(error.message));
+getEmployee(1)
+        .then(respuesta => console.log(respuesta))
+        .catch(error => console.error(error.message))
 
 
+        
 /*Crea una altra arrow function getSalary() similar a l'anterior que rebi com a paràmetre un
- objecte employee i retorni el seu salari.*/
+ objecte employee i retorni el seu salari.
 
- const getSalary = (object) => {
+ const getSalary = (obj) => {
     return new Promise((resolve,reject) => {
-        resolve(buscarIdO(object.id));
-
+        let salario = salaries.find(item => item.id == obj.id);       
+        console.log(salario);
+        if(!salario){
+            reject(new Error(`No es un id valido`));       
+        }else{ 
+            resolve(`El salario del empleado es ${salario.salary}`);                 
+        }     
     });
  }
- const buscarIdO = (id) => {
-    salaries.forEach(o=>{
-        if(o.id === id){
-            return (o.salary);
-    };
- });
-}
- getSalary(employees[0])
-            .then((employees))
-            .catch(error => console.error(error.message));
+
+ getSalary(employees[2])
+            .then((salario => console.log(salario)))
+            .catch(error => console.error(error));
 
 
 /* Invoca la primera funció getEmployee() i després getSalary() niant l'execució de les dues promises de manera que
 es retorni per la consola el nom de l'empleat/da i el seu salari.*/
- 
-const promesasEncadenadas = () => {
-    return new Promise((resolve, reject) => {        
-        resolve(getEmployee(2));
-        resolve(getSalary(employees[1]));
+
+ const getEmployee2= (id) => {
+    return new Promise((resolve,reject) =>{
+            let empleado = employees.find(item => item.id == id);
+            
+            if(empleado){
+                resolve(`El nombre del empleado es ${empleado.name}`);                
+            }else{                
+                reject(new Error(`El id ${id} no es un id valido`));
+            }   
     });
 }
 
-promesasEncadenadas()
-                .then(employees => console.log(employees.name))
-                .then(salaries => console.log(salaries.salary));
+const getSalary2 = (obj) => {
+    return new Promise((resolve,reject) => {
+        let salario = salaries.find(salario => salario.id === obj.id);        
+
+        if(salario){
+            resolve(`El nombre del empleado es  ${obj.name} y su salario es ${salario.salary}`);                
+        }else{ 
+            reject(new Error(`No es un id valido`));              
+        }     
+    });
+ }
+
+ getSalary2(getEmployee2[1])
+        .then(respuesta => getEmployee2(respuesta))
+        .catch(error => console.error(error));
+
+ /*getSalary2(getEmployee2(1))
+            .then(empleado => getSalary2(empleado))
+            //.then((salario=> console.log(salario)))
+            .catch(error => console.error(error.message));
+
+/*const getSalary2 = employee => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            let salary = salaries.find(salary => salary.id === employee.id);
+            if (salary) {
+                resolve({
+                    Nombre: employee.name,
+                    Salario: salary.salary
+                });
+            } else {
+                reject(`No se ha encontrado dato alguno sobre el ID: ${employee.id}`);
+            }
+        }, 1000);
+    });
+};
+ 
+getEmployee2(2)
+    .then(employee => getSalary2(employee))
+    .then(employeeWithSalary => console.log(employeeWithSalary))*/
+  
+/*
+getEmployee(5)
+    .then(employee => getSalary(employee))
+    .then(result => console.log(`El nombre del empleado es ${result.Nombre} y su salario es ${result.Salario}`))
+    .catch(error => {console.error(`Ha ocurrido un error: ${error}`);})*/
