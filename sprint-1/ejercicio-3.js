@@ -143,6 +143,7 @@ getEmployee2(1)
 
 //Level 3/ Exercise 1
 
-getEmployee(1)
-        .then(employee => console.log(employee))
+getEmployee2(1)
+        .then(employee => getSalary2(employee))
+        .then(employeeSalary => console.log(employeeSalary))
         .catch(error => console.error(error));
