@@ -1,3 +1,5 @@
+//Level 1 /Exercise 1
+
 let employees = [{
     id: 1,
     name: 'Linux Torvalds'
@@ -20,111 +22,103 @@ let salaries = [{
     salary: 2000
 }];
 
-
-const getEmployee = (id) =>{
-    return new Promise ((resolve,reject) =>{
-        setTimeout( () => {
-             const employee = employees.find((employee) => employee.id == id);
-             if(employee){
-                resolve(employee.name);
-             }else{
-                reject('The id not exists');
-            }
-        },1000)
-    })
-}
-
-const getSalary = (employee) =>{
-    return new Promise((resolve,reject) =>{
-        const salary = salaries.find(salary => salary.id == employee.id);
-        if(salary){
-            resolve({
-                Nombre: employee.name,
-                Salario: salary.salary
-            });
-        }else{
-            reject('The employee with that id does not exists');
+const getEmployee = (id) => {
+    return new Promise((resolve, reject) => {
+        const employee = employees.find(employee => employee.id == id);
+        if (employee) {
+            resolve(employee);
+        } else {
+            reject('The employee with this id not exists');
         }
     });
 }
 
-getEmployee(1)
-        .then(employee => getSalary(employee))
-        .catch(error => console.log(error));
-/*
-
-/* Ejercicio 2 
-
-async function promesaTime() {
-    let result = await new Promise(resolve => {
-      setTimeout(() => {
-        resolve('La promesa ha sido resuelta después de 5 segundos.');
-      }, 5000);
-    });
-  
-    return result;
-  }
-  promesaTime().then(result => {
-    console.log(result);
-    });
-
-
-async function functionAsync(id){
-    try{
-        let employee = await getEmployee(id);
-        let salary = await getSalary(employee);
-        console.log(`The employee ${employee.name} has a salary of ${salary.Salary}`);
-    }catch(error){
-        console.log(error);
-    }
-    
+const getSalary = (employee) => {
+    return new Promise((resolve, reject) => {
+        const salary = salaries.find(salary => salary.id == employee.id);
+        if (salary) {
+            resolve({
+                Name: employee.name,
+                Salary: salary.salary
+            });
+        } else {
+            reject("The employee with this id not exists");
+        }
+    })
 }
 
-functionAsync(1);*/
+async function functionAsync(id) {
+    let employee = await getEmployee(id);
+    let salary = await getSalary(employee);
+    console.log(`The employee ${employee.name} has a salary of ${salary.Salary}€`);
+}
 
-/*
-function dobleRetraso(num) {
-    return new Promise((resolve) => {
-      setTimeout(() => {
-        resolve(num * 2);
-      }, 2000);
-    });
-  }
-  
-  async function sumadenumerosDoble(a, b, c) {
-    const doubleA = await dobleRetraso(a);
-    const doubleB = await dobleRetraso(b);
-    const doubleC = await dobleRetraso(c);
-    return doubleA + doubleB + doubleC;
-  }
+functionAsync(1);
 
-  dobleRetraso(10).then(result => console.log(result));
-  sumadenumerosDoble(5, 5, 5).then(result => console.log(result));
 
-  /*
-  function dobleRetraso(num) {
-    return new Promise((resolve, reject) => {
+
+//Level 1 /Exercise 2
+
+async function asyncPromise() {
+    let promise = await new Promise(resolve => {
         setTimeout(() => {
-            if (typeof num !== 'number') {
-                reject(new Error('El parametro ha de ser un número'));
-            } else {
-                resolve(num * 2);
-            }
+            resolve("The promise has been resolve en two seconds");
         }, 2000);
     });
+    return promise;
 }
 
-async function sumadenumerosDoble(num1, num2, num3) {
+asyncPromise()
+    .then(promise => console.log(promise));
+
+
+
+
+
+//Level 2 /Exercise 1
+
+async function functionDouble(num) {
+    let double = await new Promise(resolve => {
+        setTimeout(() => {
+            resolve(num * 2);
+        }, 2000);
+    });
+    return double;
+}
+
+
+async function functionTreble(num1, num2, num3) {
+    const doubleNum1 = await functionDouble(num1);
+    const doubleNum2 = await functionDouble(num2);
+    const doubleNum3 = await functionDouble(num3);
+    const sumDouble = doubleNum1 + doubleNum2 + doubleNum3;
+    return sumDouble;
+}
+
+functionDouble(5)
+    .then(number => console.log(number));
+
+functionTreble(2, 3, 4)
+    .then(sumNums => console.log(sumNums));
+
+
+
+//Level 3 /Exercise 1
+
+async function functionTreble(num1, num2, num3) {
     try {
-        const doubleNum1 = await dobleRetraso(num1);
-        const doubleNum2 = await dobleRetraso(num2);
-        const doubleNum3 = await dobleRetraso(num3);
-        console.log(doubleNum1 + doubleNum2 + doubleNum3);
+        const doubleNum1 = await functionDouble(num1);
+        const doubleNum2 = await functionDouble(num2);
+        const doubleNum3 = await functionDouble(num3);
+        const sumDouble = doubleNum1 + doubleNum2 + doubleNum3;
+        return sumDouble;
     } catch (error) {
         console.error(error);
     }
 }
 
+functionDouble(5)
+    .then(number => console.log(number));
 
-dobleRetraso(10).then(result => console.log(result));
-sumadenumerosDoble(5, 5, 'uu').then(result => console.log(result));
+functionTreble(2, 'b', 6)
+    .then(sumNums => console.log(sumNums))
